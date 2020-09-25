@@ -3,6 +3,8 @@ env:
     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDS }}
     RESOURCE_GROUP: rg-aip  
     SUBSCRIPTION_ID: fb8be2ff-175f-48f9-b99d-7956c810abcb 
+    TEMPLATE_PATH: ./templates/basicLogicApp.json
+    TEMPLATE_PARAMETERS_PATH: ./templates/basicLogicApp.parameters.json
     
 on:
   push:
@@ -29,7 +31,8 @@ jobs:
           scope: resourcegroup
           subscriptionId: ${{env.SUBSCRIPTION_ID}}         
           resourceGroupName: ${{env.RESOURCE_GROUP}}
-          template: ./templates/basicLogicApp.json
+          template: ${{env.TEMPLATE_PATH}}
           deploymentMode: Incremental         
           deploymentName: AzureDevDeployment
-          parameters: ./templates/basicLogicApp.parameters.json
+          parameters: ${{env.TEMPLATE_PARAMETERS_PATH}
+
